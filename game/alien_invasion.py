@@ -24,15 +24,16 @@ def run_game():
     
     # Main game loop
     while True:
+        # Check for player input
         gf.check_events(ai_settings, screen, ship, bullets)
-        ship.update()
-        bullets.update()
-        gf.update_screen(ai_settings, screen, ship, bullets)
         
-        # Get rid of bullets once offscreen
-        for bullet in bullets.copy():
-            if bullet.rect.bottom <= 0:
-                bullets.remove(bullet)
+        # Update ship, bullet positions
+        ship.update()
+        gf.update_bullets(bullets)
+        
+        # Draw screen
+        gf.update_screen(ai_settings, screen, ship, bullets)
+
             
 
 run_game()
