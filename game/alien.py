@@ -15,8 +15,8 @@ class Alien(Sprite):
         self.rect = self.image.get_rect()
         
         # Start each new alien near the top left
-        self.rect.x = self.rect.width // 6
-        self.rect.y = self.rect.height // 3
+        self.rect.x = self.rect.width
+        self.rect.y = self.rect.height
         
         # Store alien's exact position
         self.x = float(self.rect.x)
