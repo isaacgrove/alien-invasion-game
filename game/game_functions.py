@@ -74,15 +74,15 @@ def update_bullets(bullets):
 
 def get_number_aliens_x(ai_settings, alien_width):
     '''Find number of aliens that fit in a row'''
-    available_space_x = ai_settings.screen_width
-    number_aliens_x = int(available_space_x / (alien_width))
+    available_space_x = ai_settings.screen_width - 2 * alien_width
+    number_aliens_x = int(available_space_x / (2 * alien_width))
     return number_aliens_x
 
 def create_alien(ai_settings, screen, aliens, alien_number):
     '''Create an alien, place it in row'''
     alien = Alien(ai_settings, screen)
     alien_width = alien.rect.width
-    alien.x = alien_width * alien_number + 50
+    alien.x = alien_width + 2 * alien_width * alien_number
     alien.rect.x = alien.x
     aliens.add(alien)          
 
