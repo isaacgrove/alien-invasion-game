@@ -95,7 +95,8 @@ def update_screen(ai_settings, screen, stats, sb, ship,
     # Make most recent screen visible.
     pygame.display.flip()
     
-def update_bullets(ai_settings, screen, ship, aliens, bullets):
+def update_bullets(ai_settings, screen, stats, sb, 
+                   ship, aliens, bullets):
     '''Update bullet positions, check collisions, 
     get rid of old bullets'''
     # Update positions
@@ -106,15 +107,20 @@ def update_bullets(ai_settings, screen, ship, aliens, bullets):
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
     
-    check_bullet_alien_collisions(ai_settings, screen, 
-                                  ship, aliens, bullets)
+    check_bullet_alien_collisions(ai_settings, screen, stats, 
+                                  sb, ship, aliens, bullets)
 
-def check_bullet_alien_collisions(ai_settings, screen, 
-                                  ship, aliens, bullets):
+def check_bullet_alien_collisions(ai_settings, screen, stats, 
+                                  sb, ship, aliens, bullets):
     '''Respond to bullet-alien collisions.'''
-    # Remove elements that have collided
+    # Remove any bullet-alien pairs that have collided
     collisions = pygame.sprite.groupcollide(bullets, aliens, 
                                             True, True)
+    # Increase score
+    if collisions:
+        stats.score += ai_settings.alien_points
+        sb.prep_score()
+    
     # If last alien is destroyed, create new fleet     
     if len(aliens) == 0:
         # Destroy existing bullets, speed up game, create new fleet
