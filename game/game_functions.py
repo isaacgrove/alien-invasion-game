@@ -33,7 +33,7 @@ def check_keyup_events(event, ship):
         # Move left.
         ship.moving_left = False   
 
-def check_events(ai_settings, screen, stats, 
+def check_events(ai_settings, screen, stats, sb, 
                  play_button, ship, aliens, bullets):
     '''Respond to keypresses and mouse events.'''
     for event in pygame.event.get(): # dumps event queue
@@ -50,11 +50,11 @@ def check_events(ai_settings, screen, stats,
         # mouse down
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
-            check_play_button(ai_settings, screen, stats, 
+            check_play_button(ai_settings, screen, stats, sb, 
                               play_button, ship, aliens, 
                               bullets, mouse_x, mouse_y)
 
-def check_play_button(ai_settings, screen, stats, play_button, 
+def check_play_button(ai_settings, screen, stats, sb, play_button, 
                       ship, aliens, bullets, mouse_x, mouse_y):
     '''Start new game when player clicks Play'''
     button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
@@ -66,6 +66,10 @@ def check_play_button(ai_settings, screen, stats, play_button,
         # Reset game stats
         stats.reset_stats()
         stats.game_active = True
+        # Reset scoreboard images
+        sb.prep_score()
+        sb.prep_high_score()
+        sb.prep_level()
         # Empty aliens, bullets
         aliens.empty()
         bullets.empty()
@@ -125,10 +129,13 @@ def check_bullet_alien_collisions(ai_settings, screen, stats,
     
     # If last alien is destroyed, create new fleet     
     if len(aliens) == 0:
-        # Destroy existing bullets, speed up game, create new fleet
+        # Delete bullets, speed up game, 
+        # create new fleet, increase level
         bullets.empty()
         ai_settings.increase_speed()
         create_fleet(ai_settings, screen, ship, aliens)
+        stats.level += 1
+        sb.prep_level()
     
     
 def check_fleet_edges(ai_settings, aliens):

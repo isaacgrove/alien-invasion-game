@@ -41,7 +41,7 @@ def run_game():
     # Main game loop
     while True:
         # Check for player input
-        gf.check_events(ai_settings, screen, stats, 
+        gf.check_events(ai_settings, screen, stats, sb, 
                         play_button, ship, aliens, bullets)
         
         if stats.game_active:
