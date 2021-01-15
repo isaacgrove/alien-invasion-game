@@ -8,19 +8,19 @@ class Settings():
         # Screen
         self.screen_width = 1200
         self.screen_height = 800
-        self.bg_color = (245, 245, 245)
+        self.bg_color = (255, 255, 255)
         
         # Ship
         self.ship_limit = 3
         
         # Bullets
-        self.bullet_width = 100
-        self.bullet_height = 8
+        self.bullet_width = 5
+        self.bullet_height = 5
         self.bullet_color = 60, 60, 60
         self.bullets_allowed = 3
         
         # Aliens
-        self.fleet_drop_speed = 30
+        self.fleet_drop_speed = 50
         
         # How quickly the game speeds up
         self.speedup_scale = 1.1
@@ -31,9 +31,9 @@ class Settings():
         
     def initialize_dynamic_settings(self):
         '''Initialize settings that change midgame'''
-        self.ship_speed_factor = 1.5
-        self.bullet_speed_factor = 10
-        self.alien_speed_factor = 0.5
+        self.ship_speed_factor = 5.0
+        self.bullet_speed_factor = 3
+        self.alien_speed_factor = 0.3
         self.fleet_direction = 1    # -1 left, 1 right
         #Scoring
         self.alien_points = 10
