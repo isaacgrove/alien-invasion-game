@@ -47,7 +47,7 @@ class Scoreboard():
         
     def prep_level(self):
         '''Turn level into rendered image'''
-        self.level_image = self.font.render(str(self.stats.level), 
+        self.level_image = self.font.render(('level ' + str(self.stats.level)), 
                                             True,
                                             self.text_color,
                                             self.ai_settings.bg_color)

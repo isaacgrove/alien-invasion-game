@@ -20,7 +20,7 @@ def run_game():
     pygame.display.set_caption("Alien Invasion")
     
     # Make Play button
-    play_button = Button(ai_settings, screen, "Play")
+    play_button = Button(ai_settings, screen, "PLAY")
     
     # Store game stats, create scoreboard
     stats = GameStats(ai_settings)
